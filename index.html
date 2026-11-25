@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faff">
+  <title>Onlycom — พื้นที่พิเศษของคุณ</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172238;
+      --muted: #758197;
+      --blue: #2c8dff;
+      --blue-deep: #1768df;
+      --line: #e7edf5;
+      --surface: #ffffff;
+      --wash: #f5f8fd;
+      --shadow: 0 22px 70px rgba(26, 61, 112, .11);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: Inter, "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
+      background:
+        radial-gradient(ellipse at 82% 18%, rgba(93, 170, 255, .12), transparent 32%),
+        radial-gradient(ellipse at 8% 75%, rgba(154, 211, 255, .16), transparent 28%),
+        #f8faff;
+    }
+    button { font: inherit; }
+    .topbar {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); }
+    .brand-mark {
+      display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px;
+      color: white; font-size: 20px; font-weight: 800; letter-spacing: -2px;
+      background: linear-gradient(145deg, #54b3ff, #2779f2); box-shadow: 0 6px 16px rgba(44, 141, 255, .25);
+    }
+    .brand-name { font-size: 23px; font-weight: 800; letter-spacing: -.9px; }
+    .brand-name span { color: var(--blue); }
+    .nav { display: flex; align-items: center; gap: 33px; color: #67758c; font-size: 14px; font-weight: 600; }
+    .nav a { color: inherit; text-decoration: none; }
+    .nav a:hover { color: var(--blue-deep); }
+    .nav .login { color: var(--ink); padding: 10px 17px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.75); }
+    main { max-width: 1180px; margin: 0 auto; padding: 58px 28px 46px; }
+    .hero { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 54px; min-height: 515px; }
+    .copy { padding: 22px 0 36px; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--blue-deep); font-size: 11px; letter-spacing: 2.4px; font-weight: 800; }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: var(--blue); border-radius: 3px; }
+    h1 { margin: 22px 0 17px; max-width: 560px; font-size: clamp(42px, 5.4vw, 67px); letter-spacing: -2.8px; line-height: 1.13; font-weight: 800; }
+    h1 .accent { color: var(--blue); }
+    .intro { max-width: 465px; color: var(--muted); font-size: 16px; line-height: 1.9; margin: 0; }
+    .trust { display: flex; align-items: center; gap: 10px; margin-top: 27px; color: #758197; font-size: 12px; }
+    .trust-icon { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; background: #e7f3ff; color: #287fe9; font-weight: 800; }
+    .showcase { position: relative; display: grid; place-items: center; min-height: 450px; }
+    .orb { position: absolute; width: 340px; height: 340px; border-radius: 50%; background: linear-gradient(145deg, rgba(207,232,255,.78), rgba(230,240,255,.28)); filter: blur(1px); }
+    .spark { position: absolute; color: #63a9ff; font-size: 21px; }
+    .spark.one { right: 4%; top: 14%; }
+    .spark.two { left: 7%; bottom: 17%; font-size: 14px; }
+    .profile-card {
+      position: relative; width: min(100%, 380px); padding: 14px; border: 1px solid rgba(255,255,255,.92);
+      border-radius: 25px; background: rgba(255,255,255,.82); box-shadow: var(--shadow); backdrop-filter: blur(14px);
+      transform: rotate(1.2deg);
+    }
+    .cover { height: 188px; position: relative; overflow: hidden; border-radius: 17px; background: linear-gradient(135deg, #90d1ff 0%, #73a9ff 48%, #b4a5ff 100%); }
+    .cover::before, .cover::after { content: ""; position: absolute; border-radius: 50%; background: rgba(255,255,255,.22); }
+    .cover::before { width: 230px; height: 230px; right: -42px; top: -94px; }
+    .cover::after { width: 165px; height: 165px; left: -56px; bottom: -102px; background: rgba(255,255,255,.16); }
+    .cover-label { position: absolute; z-index: 1; top: 16px; right: 16px; padding: 7px 10px; border-radius: 100px; color: #fff; background: rgba(33, 76, 154, .24); font-size: 10px; letter-spacing: 1.2px; font-weight: 700; }
+    .cover-art { position: absolute; inset: 0; display: grid; place-items: center; color: white; font-size: 76px; font-weight: 700; text-shadow: 0 8px 25px rgba(35, 89, 163, .17); }
+    .profile-info { display: flex; align-items: center; gap: 12px; padding: 17px 5px 14px; }
+    .avatar { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border: 3px solid white; border-radius: 50%; color: white; font-size: 20px; font-weight: 700; background: linear-gradient(145deg, #62baff, #716eea); box-shadow: 0 2px 10px rgba(47, 127, 221, .2); }
+    .creator-name { font-size: 16px; font-weight: 750; }
+    .creator-tag { color: #909bad; font-size: 12px; margin-top: 3px; }
+    .verified { display: inline-grid; place-items: center; width: 15px; height: 15px; margin-left: 4px; border-radius: 50%; background: #2d91f5; color: white; font-size: 10px; vertical-align: 1px; }
+    .open-button { width: 100%; display: flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 18px; border: 0; border-radius: 14px; color: #fff; background: linear-gradient(100deg, #329bff, #287df2); box-shadow: 0 8px 17px rgba(43, 133, 243, .23); font-weight: 750; cursor: pointer; transition: transform .18s, box-shadow .18s; }
+    .open-button:hover { transform: translateY(-2px); box-shadow: 0 12px 22px rgba(43, 133, 243, .3); }
+    .arrow { font-size: 18px; line-height: 1; }
+    .card-foot { padding: 12px 4px 1px; text-align: center; color: #9aa5b6; font-size: 10px; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-top: 18px; }
+    .feature { display: flex; align-items: center; gap: 13px; min-height: 82px; padding: 15px 17px; border: 1px solid #e9eef6; border-radius: 17px; background: rgba(255,255,255,.68); }
+    .feature-icon { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: #3688eb; background: #eaf4ff; font-size: 17px; }
+    .feature strong { display: block; margin-bottom: 3px; font-size: 12px; }
+    .feature span { color: #8a96a8; font-size: 11px; }
+    footer { max-width: 1180px; margin: 0 auto; padding: 10px 28px 28px; display: flex; justify-content: space-between; gap: 18px; color: #9aa5b5; font-size: 11px; }
+    footer a { color: inherit; text-decoration: none; }
+
+    .modal-backdrop { position: fixed; z-index: 10; inset: 0; display: none; place-items: center; padding: 20px; background: rgba(22, 34, 55, .44); backdrop-filter: blur(7px); }
+    .modal-backdrop.open { display: grid; animation: fade-in .18s ease-out; }
+    .payment-modal { position: relative; width: min(100%, 460px); padding: 28px; border: 1px solid rgba(255,255,255,.7); border-radius: 24px; background: white; box-shadow: 0 26px 90px rgba(14, 31, 61, .24); animation: rise-in .22s ease-out; }
+    .close { position: absolute; top: 17px; right: 17px; display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 50%; color: #79869a; background: #f2f5f9; cursor: pointer; font-size: 20px; }
+    .modal-icon { display: grid; place-items: center; width: 50px; height: 50px; margin-bottom: 17px; border-radius: 16px; color: #287fe9; background: #e9f4ff; font-size: 23px; }
+    .payment-modal h2 { margin: 0 40px 8px 0; font-size: 25px; letter-spacing: -.6px; }
+    .modal-lead { margin: 0 0 21px; color: #758197; font-size: 14px; line-height: 1.7; }
+    .account-box { padding: 17px; border: 1px solid #e7edf5; border-radius: 16px; background: #f9fbfe; }
+    .account-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .account-row + .account-row { margin-top: 16px; padding-top: 15px; border-top: 1px solid #e7edf5; }
+    .label { color: #8a96a8; font-size: 11px; }
+    .value { margin-top: 4px; font-size: 15px; font-weight: 750; }
+    .account-number { letter-spacing: 1px; font-variant-numeric: tabular-nums; }
+    .copy-button { flex: none; padding: 9px 11px; border: 1px solid #dce9f7; border-radius: 10px; color: #287fe9; background: white; font-size: 11px; font-weight: 700; cursor: pointer; }
+    .copy-button:hover { background: #edf6ff; }
+    .notice { display: flex; gap: 10px; margin: 16px 0 19px; padding: 12px; border-radius: 12px; color: #70633d; background: #fff8e8; font-size: 11px; line-height: 1.65; }
+    .notice-mark { flex: none; font-weight: 800; color: #d09420; }
+    .modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .secondary-button, .done-button { padding: 12px 10px; border-radius: 12px; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .secondary-button { border: 1px solid #e3e9f1; color: #65738a; background: white; }
+    .done-button { border: 0; color: white; background: var(--blue); }
+    .status { min-height: 17px; margin-top: 12px; text-align: center; color: #74839a; font-size: 11px; }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes rise-in { from { opacity: .7; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (max-width: 800px) {
+      .topbar { height: 70px; padding: 0 20px; }
+      .nav { gap: 17px; }
+      .nav a:not(.login) { display: none; }
+      main { padding: 28px 22px 36px; }
+      .hero { grid-template-columns: 1fr; gap: 4px; }
+      .copy { padding: 24px 0 0; text-align: center; }
+      .eyebrow { justify-content: center; }
+      h1 { margin-left: auto; margin-right: auto; font-size: clamp(40px, 10vw, 58px); }
+      .intro { margin: 0 auto; }
+      .trust { justify-content: center; }
+      .showcase { min-height: 420px; }
+      .features { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; width: 100%; }
+      .feature { min-height: 70px; }
+      footer { padding: 4px 22px 22px; flex-wrap: wrap; }
+    }
+    @media (max-width: 460px) {
+      .brand-name { font-size: 21px; }
+      .nav .login { padding: 9px 12px; font-size: 12px; }
+      .profile-card { width: min(100%, 350px); }
+      .cover { height: 168px; }
+      .showcase { min-height: 390px; }
+      .orb { width: 290px; height: 290px; }
+      .payment-modal { padding: 24px 19px 19px; }
+      .payment-modal h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Onlycom หน้าแรก">
+      <span class="brand-mark">oc</span><span class="brand-name">Only<span>com</span></span>
+    </a>
+    <nav class="nav" aria-label="เมนูหลัก">
+      <a href="#home">หน้าหลัก</a>
+      <a href="#creator">ครีเอเตอร์</a>
+      <a class="login" href="#login" id="loginLink">เข้าสู่ระบบ</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="copy">
+        <div class="eyebrow">ยินดีต้อนรับสู่ ONLYCOM</div>
+        <h1 id="hero-title">พื้นที่พิเศษ<br>ที่เป็น <span class="accent">ของคุณ</span></h1>
+        <p class="intro">พบกับคอนเทนต์พิเศษจากครีเอเตอร์ที่คุณชื่นชอบ เริ่มต้นเปิดประสบการณ์ใหม่ได้ในคลิกเดียว</p>
+        <div class="trust"><span class="trust-icon">✓</span> เข้าถึงง่าย ดูแลประสบการณ์ของคุณ</div>
+      </div>
+
+      <div class="showcase" id="creator">
+        <div class="orb" aria-hidden="true"></div>
+        <span class="spark one" aria-hidden="true">✦</span>
+        <span class="spark two" aria-hidden="true">✧</span>
+        <article class="profile-card">
+          <div class="cover">
+            <span class="cover-label">FEATURED CREATOR</span>
+            <div class="cover-art" aria-hidden="true">ค</div>
+          </div>
+          <div class="profile-info">
+            <div class="avatar" aria-hidden="true">ค</div>
+            <div>
+              <div class="creator-name">น้องคอม <span class="verified" aria-label="ยืนยันแล้ว">✓</span></div>
+              <div class="creator-tag">ครีเอเตอร์บน Onlycom</div>
+            </div>
+          </div>
+          <button class="open-button" id="openPayment" type="button">Open <span class="arrow" aria-hidden="true">↗</span></button>
+          <div class="card-foot">กด Open เพื่อดูรายละเอียดการเข้าใช้งาน</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="features" aria-label="จุดเด่นของ Onlycom">
+      <div class="feature"><span class="feature-icon" aria-hidden="true">✦</span><div><strong>คอนเทนต์พิเศษ</strong><span>พื้นที่สำหรับผลงานจากครีเอเตอร์</span></div></div>
+      <div class="feature"><span class="feature-icon" aria-hidden="true">⌑</span><div><strong>ใช้งานง่าย</strong><span>เริ่มต้นได้จากหน้าเดียว</span></div></div>
+      <div class="feature"><span class="feature-icon" aria-hidden="true">♡</span><div><strong>สนับสนุนครีเอเตอร์</strong><span>เข้าถึงและติดตามผลงานที่ชอบ</span></div></div>
+    </section>
+  </main>
+
+  <footer><span>© 2026 Onlycom · ตัวอย่างหน้าเว็บไซต์</span><span><a href="#privacy">ความเป็นส่วนตัว</a> &nbsp;·&nbsp; <a href="#terms">ข้อกำหนดการใช้งาน</a></span></footer>
+
+  <div class="modal-backdrop" id="paymentBackdrop" role="presentation">
+    <section class="payment-modal" role="dialog" aria-modal="true" aria-labelledby="paymentTitle" aria-describedby="paymentDescription">
+      <button class="close" type="button" id="closePayment" aria-label="ปิด">×</button>
+      <div class="modal-icon" aria-hidden="true">▣</div>
+      <h2 id="paymentTitle">ชำระเงินเพื่อเข้าใช้งาน</h2>
+      <p class="modal-lead" id="paymentDescription">ปลดล็อกพื้นที่พิเศษของ <strong>น้องคอม</strong> โดยโอนเงินเข้าบัญชีด้านล่าง</p>
+      <div class="account-box">
+        <div class="account-row">
+          <div><div class="label">ชื่อบัญชี</div><div class="value">น้องคอม</div></div>
+          <span aria-hidden="true">♙</span>
+        </div>
+        <div class="account-row">
+          <div><div class="label">เลขบัญชี</div><div class="value account-number" id="accountNumber">999-99999</div></div>
+          <button class="copy-button" id="copyAccount" type="button">คัดลอกเลขบัญชี</button>
+        </div>
+      </div>
+      <div class="notice"><span class="notice-mark">!</span><span>ข้อมูลบัญชีนี้เป็นข้อมูลตัวอย่าง โปรดตรวจสอบยอดและรายละเอียดกับผู้ให้บริการก่อนโอน</span></div>
+      <div class="modal-actions">
+        <button class="secondary-button" id="backButton" type="button">กลับหน้าแรก</button>
+        <button class="done-button" id="doneButton" type="button">เข้าใจแล้ว</button>
+      </div>
+      <div class="status" id="statusMessage" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <script>
+    const backdrop = document.getElementById('paymentBackdrop');
+    const openButton = document.getElementById('openPayment');
+    const closeButton = document.getElementById('closePayment');
+    const copyButton = document.getElementById('copyAccount');
+    const statusMessage = document.getElementById('statusMessage');
+
+    function openPayment() {
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      closeButton.focus();
+    }
+    function closePayment() {
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      statusMessage.textContent = '';
+      openButton.focus();
+    }
+
+    openButton.addEventListener('click', openPayment);
+    closeButton.addEventListener('click', closePayment);
+    document.getElementById('backButton').addEventListener('click', closePayment);
+    document.getElementById('doneButton').addEventListener('click', closePayment);
+    document.getElementById('loginLink').addEventListener('click', (event) => {
+      event.preventDefault();
+      openPayment();
+    });
+    backdrop.addEventListener('click', (event) => {
+      if (event.target === backdrop) closePayment();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && backdrop.classList.contains('open')) closePayment();
+    });
+    copyButton.addEventListener('click', async () => {
+      const account = document.getElementById('accountNumber').textContent.trim();
+      try {
+        await navigator.clipboard.writeText(account);
+        statusMessage.textContent = 'คัดลอกเลขบัญชีแล้ว';
+      } catch {
+        statusMessage.textContent = 'เลขบัญชี: ' + account;
+      }
+    });
+  </script>
+</body>
+</html>
